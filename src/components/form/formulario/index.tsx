@@ -1,6 +1,10 @@
 import { Copy, Mic, Image } from "lucide-react";
 
-export const Formulario = ({ planoAtivo }) => {
+interface FormularioProps {
+  planoAtivo: string;
+}
+
+export const Formulario = ({ planoAtivo }: FormularioProps) => {
   return (
     <form className="px-4 w-full h-full flex flex-col gap-6">
       <input
