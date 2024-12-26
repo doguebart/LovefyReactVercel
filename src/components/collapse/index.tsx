@@ -17,7 +17,7 @@ export const Collapse = ({
     <div
       onClick={onToggle}
       className={`w-full max-h-full flex flex-col p-4 cursor-pointer ${
-        setCollapseOpen ? "bg-rosa-lovefy rounded-xl" : "bg-white"
+        setCollapseOpen ? "bg-rosa-ilovefy rounded-xl" : "bg-white"
       }`}
     >
       <div
@@ -27,7 +27,7 @@ export const Collapse = ({
       >
         <span
           className={`font-bold text-[18px] ${
-            setCollapseOpen ? "text-white" : "text-rosa-lovefy"
+            setCollapseOpen ? "text-white" : "text-rosa-ilovefy"
           }`}
         >
           {title}
@@ -45,7 +45,7 @@ export const Collapse = ({
           setCollapseOpen ? "max-h-[500px]" : "max-h-0"
         }`}
       >
-        <p className="text-white text-medium mt-2 text-sm bg-dark-rosa-lovefy p-4 rounded-xl">
+        <p className="text-white text-medium mt-2 text-sm bg-dark-rosa-ilovefy p-4 rounded-xl">
           {content}
         </p>
       </div>
