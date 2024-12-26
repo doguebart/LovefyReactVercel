@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 export const Footer = () => {
   const now = new Date();
 
   return (
-    <footer className="w-full max-h-full py-10 gap-10 flex flex-col">
+    <footer className="w-full max-h-full py-10 gap-10 flex flex-col bg-white">
       <div className="w-full flex flex-col items-center gap-2">
         <p className="text-lg font-bold text-rosa-ilovefy">iLovefy</p>
         <ul className="flex flex-col gap-1 items-center">
@@ -24,14 +26,20 @@ export const Footer = () => {
         </p>
         <ul className="flex flex-col gap-1 items-center">
           <li>
-            <a href="#" className="text-center text-neutral-600 font-thin">
+            <Link
+              to="/termos"
+              className="text-center text-neutral-600 font-thin"
+            >
               Termos e Condições
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-center text-neutral-600 font-thin">
+            <Link
+              to="/politica-privacidade"
+              className="text-center text-neutral-600 font-thin"
+            >
               Política de Uso
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

@@ -14,12 +14,28 @@ export const Formulario = ({ planoAtivo }: FormularioProps) => {
     null
   );
   const [erroLink, setErroLink] = useState<string | null>(null);
-  const [mensagem, setMensagem] = useState(""); // Novo estado para a mensagem do textarea
-  const [erroMensagem, setErroMensagem] = useState<string | null>(null); // Erro para a validação de palavras
+  const [mensagem, setMensagem] = useState("");
+  const [erroMensagem, setErroMensagem] = useState<string | null>(null);
+
+  const [nome, setNome] = useState("");
+  const [erroNome, setErroNome] = useState<string | null>(null);
+  const [nomeAmor, setNomeAmor] = useState("");
+  const [erroNomeAmor, setErroNomeAmor] = useState<string | null>(null);
 
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserNodeRef = useRef<AnalyserNode | null>(null);
   const dataArrayRef = useRef<Uint8Array | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const validarNome = (nome: string) => {
+    const palavras = contarPalavras(nome);
+    if (nome.length < 3) {
+      return "O nome precisa ter pelo menos 3 letras.";
+    } else if (palavras > 5) {
+      return "O nome não pode ter mais de 5 palavras.";
+    }
+    return null;
+  };
 
   const validarLinkYoutube = (link: string): boolean => {
     const youtubeRegex =
@@ -128,18 +144,44 @@ export const Formulario = ({ planoAtivo }: FormularioProps) => {
     }
   };
 
+  const removerFoto = (index: number) => {
+    setFotosSelecionadas((prevFotos) =>
+      prevFotos.filter((_, i) => i !== index)
+    );
+  };
+
   return (
     <form className="px-4 w-full h-full flex flex-col gap-6">
-      <input
-        type="text"
-        className="border border-neutral-200 outline-none px-4 py-3 rounded-xl placeholder:text-neutral-600"
-        placeholder="Seu nome"
-      />
-      <input
-        type="text"
-        className="border border-neutral-200 outline-none px-4 py-3 rounded-xl placeholder:text-neutral-600"
-        placeholder="Nome do seu amor"
-      />
+      <div className="w-full max-h-full flex flex-col gap-1">
+        <input
+          type="text"
+          className="border border-neutral-200 outline-none px-4 py-3 rounded-xl placeholder:text-neutral-600"
+          placeholder="Seu nome"
+          value={nome}
+          onChange={(e) => {
+            setNome(e.target.value);
+            setErroNome(validarNome(e.target.value));
+          }}
+        />
+        {erroNome && (
+          <span className="pl-2 text-red-500 text-sm">{erroNome}</span>
+        )}
+      </div>
+      <div className="w-full max-h-full flex flex-col gap-1">
+        <input
+          type="text"
+          className="border border-neutral-200 outline-none px-4 py-3 rounded-xl placeholder:text-neutral-600"
+          placeholder="Nome do seu amor"
+          value={nomeAmor}
+          onChange={(e) => {
+            setNomeAmor(e.target.value);
+            setErroNomeAmor(validarNome(e.target.value));
+          }}
+        />
+        {erroNomeAmor && (
+          <span className="pl-2 text-red-500 text-sm">{erroNomeAmor}</span>
+        )}
+      </div>
       <div className={`w-full max-h-full relative ${erroLink ? "mb-4" : ""}`}>
         <div>
           <input
@@ -172,7 +214,7 @@ export const Formulario = ({ planoAtivo }: FormularioProps) => {
           )}
         </div>
         {erroLink && (
-          <span className="left-2 absolute top-12 text-red-500 text-sm mt-1">
+          <span className="left-2 absolute top-13 text-red-500 text-sm mt-1">
             {erroLink}
           </span>
         )}
@@ -203,6 +245,32 @@ export const Formulario = ({ planoAtivo }: FormularioProps) => {
           <Image className="size-5" />
         </button>
       </div>
+
+      {fotosSelecionadas.length > 0 ? (
+        <div
+          className={`w-full overflow-x-auto gap-4 p-2 ${
+            fotosSelecionadas ? "flex" : "hidden"
+          }`}
+        >
+          {fotosSelecionadas.map((foto, index) => (
+            <div key={index} className="relative">
+              <img
+                src={URL.createObjectURL(foto)}
+                alt={`Foto ${index + 1}`}
+                className="min-h-28 min-w-28 max-h-28 max-w-28 object-cover rounded-xl"
+              />
+              <button
+                type="button"
+                className="absolute -top-2 -right-2 bg-rosa-ilovefy p-1 text-white rounded-full"
+                onClick={() => removerFoto(index)}
+              >
+                <X className="size-5" />
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : null}
+
       {planoAtivo === "completo" && (
         <>
           <div className="w-full max-h-full relative">
@@ -225,6 +293,17 @@ export const Formulario = ({ planoAtivo }: FormularioProps) => {
               )}
             </button>
           </div>
+          {audioGravado && (
+            <div className="w-full flex flex-col gap-2 items-center rounded-xl">
+              <audio
+                className="w-full bg-transparent"
+                ref={audioRef}
+                controls
+                src={URL.createObjectURL(audioGravado)}
+              />
+            </div>
+          )}
+
           <div className="w-full max-h-full flex flex-col gap-1">
             <textarea
               placeholder="Escreva uma mensagem para a pessoa que você ama!"

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const PlanoCompleto = () => {
   const [planoAtivo, setPlanoAtivo] = useState("completo");
+
   const navigate = useNavigate();
 
   const alternarPlano = () => {
@@ -72,6 +73,16 @@ export const PlanoCompleto = () => {
         </div>
       </div>
       <Formulario planoAtivo={planoAtivo} />
+
+      <div className="w-full px-4 max-h-full">
+        <button
+          type="submit"
+          className="text-center w-full m-auto py-3 px-6 text-white font-bold bg-rosa-ilovefy/90 rounded-xl text-lg shadow-intense-dark-rosa"
+        >
+          Gerar iLovefy
+        </button>
+      </div>
+
       <div className="w-full px-4 flex flex-col gap-10">
         <h2 className="px-4 text-3xl text-neutral-600 font-medium text-center leading-[1.1em]">
           Confira o <br />

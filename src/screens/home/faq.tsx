@@ -31,10 +31,10 @@ export const Faq = () => {
             {
               question: "O iLovefy é gratuito?",
               answer:
-                "Não! O iLovefy oferece dois planos pagos: o 'iLovefy Simples', por R$ 14,00, que inclui os recursos essenciais, e o 'iLovefy Completo', por R$ 24,99, que conta com recursos adicionais para uma experiência mais personalizada.",
+                "Não! O iLovefy oferece dois planos pagos: o 'iLovefy Simples', por R$14.00, que inclui os recursos essenciais, e o 'iLovefy Completo', por R$24.99, que conta com recursos adicionais para uma experiência mais personalizada.",
             },
             {
-              question: "Quais são as formas de pagamento aceitas?",
+              question: "Quais formas de pagamento são aceitas?",
               answer: "Aceitamos cartões de crédito, débito e PIX.",
             },
             {
@@ -45,7 +45,7 @@ export const Faq = () => {
             {
               question: "Como posso entrar em contato com o suporte?",
               answer:
-                "Se tiver dúvidas ou enfrentar problemas técnicos, você pode entrar em contato conosco pelo e-mail suporte@ilovefy.com.br.",
+                "Se tiver dúvidas ou enfrentar problemas técnicos, você pode entrar em contato conosco pelo email (suporte@ilovefy.com.br).",
             },
           ].map((item, index) => (
             <div
