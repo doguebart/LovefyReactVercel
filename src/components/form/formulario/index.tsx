@@ -39,7 +39,7 @@ export const Formulario = ({ planoAtivo }: FormularioProps) => {
 
   const validarLinkYoutube = (link: string): boolean => {
     const youtubeRegex =
-      /^(https?\:\/\/)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|playlist\?list=)[A-Za-z0-9_-]{11}$/;
+      /^(https?:\/\/)?(www\.|m\.)?(youtube\.com|youtu\.be)\/.*$/;
     return youtubeRegex.test(link);
   };
 
@@ -132,8 +132,8 @@ export const Formulario = ({ planoAtivo }: FormularioProps) => {
 
   const validarMensagem = () => {
     const numeroDePalavras = contarPalavras(mensagem);
-    if (numeroDePalavras < 20) {
-      setErroMensagem("A mensagem precisa de no mínimo 20 palavras.");
+    if (numeroDePalavras < 10) {
+      setErroMensagem("A mensagem precisa de no mínimo 10 palavras.");
       return false;
     } else if (numeroDePalavras > 60) {
       setErroMensagem("Número máximo de palavras atingido.");
